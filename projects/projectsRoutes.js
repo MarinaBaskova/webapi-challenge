@@ -27,6 +27,17 @@ router.get('/:id', (req, res) => {
 		});
 });
 
+router.get('/:id/actions', (req, res) => {
+	dbProjects
+		.getProjectActions(req.params.id)
+		.then((actonsForProject) => {
+			res.status(200).json(actonsForProject);
+		})
+		.catch((err) => {
+			res.status().json({ error: 'The list of actions for project information could not be retrieved' });
+		});
+});
+
 router.post('/', (req, res) => {
 	const newProject = req.body;
 	if (
